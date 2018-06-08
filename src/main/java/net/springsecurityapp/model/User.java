@@ -14,14 +14,16 @@ import java.util.Set;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Column(name = "id")
     private Long id;
     @Column(name = "username")
     private String username;
     @Column(name = "password")
-    private String passwords;
+    private String password;
     @Transient
-    transient private String confirmPassword;
+    private String confirmPassword;
     @ManyToMany
     @JoinTable(name = "user_roles",joinColumns = @JoinColumn(name = "user_id"),inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
@@ -34,7 +36,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", passwords='" + passwords + '\'' +
+                ", passwords='" + password + '\'' +
                 ", confirmPassword='" + confirmPassword + '\'' +
                 ", roles=" + roles +
                 '}';
@@ -56,12 +58,12 @@ public class User {
         this.username = username;
     }
 
-    public String getPasswords() {
-        return passwords;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswords(String passwords) {
-        this.passwords = passwords;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getConfirmPassword() {

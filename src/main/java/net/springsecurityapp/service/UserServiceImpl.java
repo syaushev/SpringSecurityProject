@@ -22,11 +22,12 @@ public class UserServiceImpl implements UserService
     private UserDao userDao;
     @Autowired
     private RoleDao roleDao;
+
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public void save(User user) {
-        user.setPasswords(bCryptPasswordEncoder.encode(user.getPasswords()));
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         Set<Role> roles=new HashSet<Role>();
         roles.add(roleDao.getOne(1L));
         user.setRoles(roles);
